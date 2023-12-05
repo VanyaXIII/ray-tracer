@@ -5,4 +5,9 @@
 #include "ray.h"
 
 Ray::Ray(const Point3& point, const Vector3& vect) : point(point), vect(vect) {
+  this->vect.normalize();
+}
+
+Point3 Ray::get_point_by_shift(double t) const {
+  return point + vect.multiplied(t);
 }

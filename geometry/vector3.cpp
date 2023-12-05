@@ -19,6 +19,14 @@ void Vector3::multiply(double mul) {
   z *= mul;
 }
 
+Vector3 Vector3::multiplied(double mul) const {
+  Vector3 res(*this);
+  res.x *= mul;
+  res.y *= mul;
+  res.z *= mul;
+  return res;
+}
+
 double Vector3::squared_length() const {
   return x * x + y * y + z * x;
 }
@@ -42,6 +50,14 @@ Vector3& Vector3::operator-=(const Vector3& other) {
   y -= other.y;
   z -= other.z;
   return *this;
+}
+
+Vector3 operator-(Vector3 first, const Vector3& second) {
+  return first -= second;
+}
+
+Vector3 operator+(Vector3 first, const Vector3& second) {
+  return first += second;
 }
 
 double dot_product(const Vector3& vec1, const Vector3& vec2) {

@@ -1,11 +1,8 @@
-//
-// Created by ivan on 12/5/23.
-//
 
-#include "render/pixmap.h"
+#include "camera.h"
 
 int main() {
-  Pixmap pixmap(500, 500, Color(255, 0, 0));
-  pixmap.write_to_stdout();
+  Camera camera(200, 200, Point3(0., 0., 0.),  {Point3(1, -1, 1), Point3(1, 1, 1), Point3(1, -1, -1), Point3{1, 1, -1}});
+  int t = 1;
   return 0;
 }
