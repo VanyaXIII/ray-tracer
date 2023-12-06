@@ -1,7 +1,7 @@
 #pragma once
-#include "color.h"
-#include "ray.h"
-#include "vector3.h"
+
+#include "scene/color.h"
+#include "utils/vector3.h"
 
 struct Renderable {
   Color color;

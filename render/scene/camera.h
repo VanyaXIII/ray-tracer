@@ -4,8 +4,8 @@
 
 using std::size_t;
 
-#include "ray.h"
-#include "vector3.h"
+#include "objects/ray.h"
+#include "utils/vector3.h"
 
 class Camera {
   size_t height_;

@@ -1,5 +1,5 @@
 #pragma once
-#include "plane.h"
+#include "objects/plane.h"
 #include "renderable.h"
 
 struct ColoredPlane final : Plane, Renderable{

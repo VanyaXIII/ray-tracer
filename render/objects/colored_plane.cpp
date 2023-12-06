@@ -1,7 +1,3 @@
-//
-// Created by ivan on 12/6/23.
-//
-
 #include "colored_plane.h"
 
 ColoredPlane::ColoredPlane(const Point3& point1, const Point3& point2, const Point3& point3, const Color& color) : Plane(point1, point2, point3), Renderable(color) {}

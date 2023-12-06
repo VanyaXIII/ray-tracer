@@ -1,7 +1,3 @@
-//
-// Created by ivan on 12/5/23.
-//
-
 #include "pixmap.h"
 
 #include <fstream>

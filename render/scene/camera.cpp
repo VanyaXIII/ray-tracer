@@ -1,6 +1,6 @@
 #include "camera.h"
 
-#include "utils.h"
+#include "utils/utils.h"
 
 Camera::Camera(size_t width, size_t height, const Point3& focus, const std::array<Point3, 4>& corners) :
   height_(height), width_(width), focus_(focus), normal_(get_center_of_rectangle(corners)),

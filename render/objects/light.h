@@ -1,5 +1,5 @@
 #pragma once
-#include "vector3.h"
+#include "utils/vector3.h"
 
 struct Light {
   Point3 posiiton;
