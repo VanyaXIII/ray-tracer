@@ -19,6 +19,13 @@ Camera::Camera(size_t width, size_t height, const Point3& focus, const std::arra
   }
 }
 
+void Camera::move(const Vector3& movement) {
+  for (auto& ray : rays_) {
+    ray.point += movement;
+  }
+  focus_ += movement;
+}
+
 size_t Camera::width() const {
   return width_;
 }

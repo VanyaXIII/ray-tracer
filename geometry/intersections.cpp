@@ -1,14 +1,12 @@
 #include "intersections.h"
 
-#include <cmath>
-#include <complex>
-#include <iostream>
 
 #include "compare.h"
+#include "utils.h"
 
 bool sphere_ray_intersection(const Sphere& sphere, const Ray& ray, double& res) {
   Point3 point = ray.point - sphere.center;
-  double coef = ray.vect.x * point.x + ray.vect.y * point.y + ray.vect.z * point.z;
+  double coef = dot_product(ray.vect, point);
   double val = coef * coef - point.squared_length() + sphere.rad * sphere.rad;
   if (is_less(val, 0)) {
     return false;

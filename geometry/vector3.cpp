@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include "utils.h"
+
 Vector3::Vector3(double x, double y, double z) : x(x), y(y), z(z) {
 }
 
@@ -67,7 +69,7 @@ Vector3 operator+(Vector3 first, const Vector3& second) {
 }
 
 double dot_product(const Vector3& vec1, const Vector3& vec2) {
-  return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+  return fma(vec1.x, vec2.x, fma(vec1.y, vec2.y, fma(vec1.z, vec2.z, 0.)));
 }
 
 Vector3 cross_product(const Vector3& vec1, const Vector3& vec2) {

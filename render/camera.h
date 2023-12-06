@@ -17,6 +17,8 @@ class Camera {
 public:
   Camera(size_t width, size_t height, const Point3& focus, const std::array<Point3, 4>& corners);
 
+  void move(const Vector3& movement);
+
   size_t height() const;
   size_t width() const;
   const std::vector<Ray>& rays() const;
