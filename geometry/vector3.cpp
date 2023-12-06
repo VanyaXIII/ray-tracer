@@ -31,11 +31,17 @@ double Vector3::squared_length() const {
   return x * x + y * y + z * z;
 }
 
-void Vector3::normalize() {
+Vector3& Vector3::normalize() {
   auto len = length();
   x /= len;
   y /= len;
   z /= len;
+  return *this;
+}
+
+Vector3 Vector3::normalized() const {
+  Vector3 res(*this);
+  return res.normalize();
 }
 
 Vector3& Vector3::operator+=(const Vector3& other) {
@@ -62,4 +68,8 @@ Vector3 operator+(Vector3 first, const Vector3& second) {
 
 double dot_product(const Vector3& vec1, const Vector3& vec2) {
   return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+}
+
+Vector3 cross_product(const Vector3& vec1, const Vector3& vec2) {
+  return Vector3(vec1.y * vec2.z - vec1.z * vec2.y, vec1.z * vec2.x - vec1.x * vec2.z, vec1.x * vec2.y - vec1.y * vec2.x);
 }

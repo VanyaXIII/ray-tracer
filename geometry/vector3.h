@@ -14,7 +14,8 @@ struct Vector3 {
     void multiply(double mul);
     Vector3 multiplied(double mul) const;
     double squared_length() const;
-    void normalize();
+    Vector3& normalize();
+    Vector3 normalized() const;
 
     Vector3& operator+=(const Vector3& other);
     Vector3& operator-=(const Vector3& other);
@@ -26,3 +27,4 @@ Vector3 operator-(Vector3 first, const Vector3& second);
 Vector3 operator+(Vector3 first, const Vector3& second);
 
 double dot_product(const Vector3& vec1, const Vector3& vec2);
+Vector3 cross_product(const Vector3& vec1, const Vector3& vec2);

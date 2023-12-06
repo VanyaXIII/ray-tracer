@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.21)
 project(ray-tracer)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -30,4 +30,10 @@ add_executable(ray-tracer main.cpp
         render/colored_sphere.cpp
         render/colored_sphere.h
         render/static_scene.cpp
-        render/staic_scene.h)
+        render/staic_scene.h
+        render/light.cpp
+        render/light.h
+        geometry/plane.cpp
+        geometry/plane.h
+        render/colored_plane.cpp
+        render/colored_plane.h)

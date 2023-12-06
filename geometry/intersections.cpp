@@ -26,3 +26,17 @@ bool sphere_ray_intersection(const Sphere& sphere, const Ray& ray, double& res) 
   res = res1;
   return true;
 }
+
+bool plane_ray_intersection(const Plane& plane, const Ray& ray, double& res) {
+  double val1 = dot_product(plane.normal, ray.vect);
+  if (is_zero(val1)) {
+    return false;
+  }
+  double val2 = -plane.coef_val - dot_product(plane.normal, ray.point);
+  double check = val2 / val1;
+  if (is_less(check, 0)) {
+    return false;
+  }
+  res = check;
+  return true;
+}
