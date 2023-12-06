@@ -8,13 +8,15 @@
 #include <iostream>
 #include <stdexcept>
 
-Pixmap::Pixmap(size_t height, size_t width, const Color& color) : pixels_map_(height, std::vector<Color>(width, color)) {
+Pixmap::Pixmap(size_t height, size_t width, const Color& color) : pixels_map_(
+  height, std::vector<Color>(width, color)) {
   if (height == 0 || width == 0) {
     throw std::runtime_error("Invalid size");
   }
 }
 
-Pixmap::Pixmap(size_t height, size_t width)  : Pixmap(height, width, Color(0, 0, 0)) {}
+Pixmap::Pixmap(size_t height, size_t width) : Pixmap(height, width, Color(0, 0, 0)) {
+}
 
 const Color& Pixmap::get(size_t i, size_t j) const {
   return pixels_map_[i][j];
@@ -46,12 +48,13 @@ void Pixmap::write(std::ostream& out) const {
   out << "255\n";
   for (size_t i = 0; i < pixels_map_.size(); ++i) {
     for (size_t j = 0; j < pixels_map_[0].size(); ++j) {
-      out << pixels_map_[i][j].r << ' ' << pixels_map_[i][j].g << ' ' << pixels_map_[i][j].b << '\n';
+      out << static_cast<int>(pixels_map_[i][j].r) << ' ' << static_cast<int>(pixels_map_[i][j].g) << ' ' << static_cast
+        <int>(pixels_map_[i][j].b) << '\n';
     }
   }
 }
 
-void Pixmap::write_to_ppm(const std::string& path) const{
+void Pixmap::write_to_ppm(const std::string& path) const {
   std::ofstream out(path);
   write(out);
   out.close();

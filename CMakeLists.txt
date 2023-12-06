@@ -25,7 +25,9 @@ add_executable(ray-tracer main.cpp
         render/camera.h
         geometry/utils.h
         geometry/utils.cpp
-        render/colorable.cpp
-        render/colorable.h
+        render/renderable.cpp
+        render/renderable.h
         render/colored_sphere.cpp
-        render/colored_sphere.h)
+        render/colored_sphere.h
+        render/static_scene.cpp
+        render/staic_scene.h)

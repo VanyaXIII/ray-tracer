@@ -10,3 +10,11 @@ inline bool equal(double first, double second) {
 inline bool is_zero(double num) {
   return std::abs(num) < eps;
 }
+
+inline bool is_greater(double first, double second) {
+  return first > second + eps;
+}
+
+inline bool is_less(double first, double second) {
+  return first + eps < second;
+}

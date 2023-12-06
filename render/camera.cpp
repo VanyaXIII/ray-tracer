@@ -12,9 +12,22 @@ Camera::Camera(size_t width, size_t height, const Point3& focus, const std::arra
   Point3 current = corners[0];
   for (size_t i = 0; i < height_; ++i) {
     for (size_t j = 0; j < width_; ++j) {
-      rays_[i * height_ + j] = Ray(current, Vector3(focus_, current));
+      rays_[i * width_ + j] = Ray(focus_, Vector3(focus_, current));
       current += vec1;
     }
     current = corners[0] + vec2.multiplied(i + 1);
   }
 }
+
+size_t Camera::width() const {
+  return width_;
+}
+
+const std::vector<Ray>& Camera::rays() const {
+  return rays_;
+}
+
+size_t Camera::height() const {
+  return height_;
+}
+

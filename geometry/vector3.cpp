@@ -28,7 +28,7 @@ Vector3 Vector3::multiplied(double mul) const {
 }
 
 double Vector3::squared_length() const {
-  return x * x + y * y + z * x;
+  return x * x + y * y + z * z;
 }
 
 void Vector3::normalize() {
