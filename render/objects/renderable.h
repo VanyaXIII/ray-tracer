@@ -1,12 +1,12 @@
 #pragma once
 
-#include "scene/color.h"
+#include "scene/material.h"
 #include "utils/vector3.h"
 
 struct Renderable {
-  Color color;
+  Material material;
   Renderable() = default;
-  explicit Renderable(const Color& color);
+  explicit Renderable(const Material& material);
   virtual Vector3 normal(const Point3& point) const = 0;
   virtual ~Renderable() = default;
 };

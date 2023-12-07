@@ -29,8 +29,8 @@ add_executable(ray-tracer main.cpp
         geometry/utils/vector3.h
         geometry/utils/vector3.cpp
         main.cpp
-        render/scene/color.cpp
-        render/scene/color.h
+        render/scene/material.cpp
+        render/scene/material.h
         render/scene/pixmap.cpp
         render/scene/pixmap.h
         geometry/objects/ray.cpp

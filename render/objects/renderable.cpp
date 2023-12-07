@@ -1,5 +1,5 @@
 #include "renderable.h"
 
 
-Renderable::Renderable(const Color& color) : color(color) {
+Renderable::Renderable(const Material& material) : material(material) {
 }

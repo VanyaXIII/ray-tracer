@@ -4,6 +4,6 @@
 #include "objects/sphere.h"
 
 struct ColoredSphere final : Sphere, Renderable {
-  ColoredSphere(const Point3& center, double rad, const Color& color);
+  ColoredSphere(const Point3& center, double rad, const Material& material);
   Vector3 normal(const Point3& point) const override;
 };

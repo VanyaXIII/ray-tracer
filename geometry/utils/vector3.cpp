@@ -75,3 +75,7 @@ double dot_product(const Vector3& vec1, const Vector3& vec2) {
 Vector3 cross_product(const Vector3& vec1, const Vector3& vec2) {
   return Vector3(vec1.y * vec2.z - vec1.z * vec2.y, vec1.z * vec2.x - vec1.x * vec2.z, vec1.x * vec2.y - vec1.y * vec2.x);
 }
+
+Vector3 reflect(const Vector3& vec, const Vector3& normal) {
+  return vec - normal.multiplied(2. * dot_product(normal, vec));
+}

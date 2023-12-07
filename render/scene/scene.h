@@ -20,7 +20,8 @@ class Scene {
 
 protected:
   bool check_intersections(const Ray& ray, double shift) const;
-  bool trace_ray(size_t i, size_t j, Color& color) const;
+  bool trace_ray(const Ray& ray, Color& color, size_t depth = 0) const;
+  Renderable const* find_intersection_object(const Ray& ray, double& shift) const;
 
 public:
   void move_camera(const Vector3& movement);

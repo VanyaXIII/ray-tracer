@@ -28,3 +28,4 @@ Vector3 operator+(Vector3 first, const Vector3& second);
 
 double dot_product(const Vector3& vec1, const Vector3& vec2);
 Vector3 cross_product(const Vector3& vec1, const Vector3& vec2);
+Vector3 reflect(const Vector3& vec, const Vector3& normal);

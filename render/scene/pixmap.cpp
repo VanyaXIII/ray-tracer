@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 Pixmap::Pixmap(size_t height, size_t width, const Color& color) : pixels_map_(
-  height, std::vector<Color>(width, color)) {
+  height, std::vector<Color>(width, color)), changed_(height, std::vector<bool>(width, false)) {
   if (height == 0 || width == 0) {
     throw std::runtime_error("Invalid size");
   }
@@ -15,15 +15,16 @@ Pixmap::Pixmap(size_t height, size_t width) : Pixmap(height, width, Color(0, 0, 
 }
 
 const Color& Pixmap::get(size_t i, size_t j) const {
-  return pixels_map_[i][j];
-}
-
-Color& Pixmap::get(size_t i, size_t j) {
+  changed_[i][j] = false;
   return pixels_map_[i][j];
 }
 
 void Pixmap::set(size_t i, size_t j, const Color& color) {
+  if (pixels_map_[i][j] == color) {
+    return;
+  }
   pixels_map_[i][j] = color;
+  changed_[i][j] = true;
 }
 
 size_t Pixmap::get_width() const {

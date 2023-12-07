@@ -2,17 +2,17 @@
 #include <string>
 #include <vector>
 
-#include "color.h"
+#include "material.h"
 
 class Pixmap {
   std::vector<std::vector<Color>> pixels_map_;
+  mutable std::vector<std::vector<bool>> changed_;
 
 public:
   Pixmap(size_t height, size_t width, const Color& color);
   Pixmap(size_t height, size_t width);
 
   const Color& get(size_t i, size_t j) const;
-  Color& get(size_t i, size_t j);
   void set(size_t i, size_t j, const Color& color);
 
   size_t get_width() const;
