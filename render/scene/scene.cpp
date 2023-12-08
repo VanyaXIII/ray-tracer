@@ -4,6 +4,8 @@
 #include "utils/intersections.h"
 #include "scene.h"
 
+#include <fstream>
+
 #include "objects/ray.h"
 
 
@@ -36,7 +38,7 @@ bool Scene::check_intersections(const Ray& ray, double shift) const {
 }
 
 bool Scene::trace_ray(const Ray& ray, Color& color, size_t depth) const {
-  if (depth > 10) {
+  if (depth > 1000) {
     return false;
   }
   double res;
@@ -72,7 +74,8 @@ bool Scene::trace_ray(const Ray& ray, Color& color, size_t depth) const {
   dif_intensity = std::min(dif_intensity, 1.);
   spec_intensity = std::min(spec_intensity, 1.);
   const Material& material = obj->material;
-  color = material.diffuse_color.multiplied(material.albedo.x * dif_intensity) + Color(255, 255, 255).multiplied(spec_intensity * material.albedo.y);
+  color = material.diffuse_color.multiplied(material.albedo.x * dif_intensity) + Color(255, 255, 255).multiplied(
+    spec_intensity * material.albedo.y);
   if (reflection_flag) {
     color = color + reflection_color.multiplied(material.albedo.z);
   }
@@ -91,7 +94,8 @@ Renderable const* Scene::find_intersection_object(const Ray& ray, double& shift)
   }
   for (const auto& plane : planes_) {
     double val;
-    if (plane_ray_intersection(plane, ray, val) && val < res) {
+    bool int_val = plane_ray_intersection(plane, ray, val);
+    if (int_val && val < res) {
       res = val;
       obj = &plane;
     }
@@ -122,4 +126,43 @@ const Camera& Scene::camera() const {
 
 const Pixmap& Scene::pixmap() const {
   return pixmap_;
+}
+
+json Scene::to_json() const {
+  json res;
+  for (const auto& sphere : spheres_) {
+    res["spheres"].push_back(sphere.to_json());
+  }
+  for (const auto& plane : planes_) {
+    res["planes"].push_back(plane.to_json());
+  }
+  for (const auto& light : lights_) {
+    res["lights"].push_back(light.to_json());
+  }
+  res["camera"] = camera_.to_json();
+  return res;
+}
+
+Scene scene_from_json(const json& json_obj) {
+  Camera camera = camera_from_json(json_obj["camera"]);
+  std::vector<ColoredSphere> spheres;
+  std::vector<ColoredPlane> planes;
+  std::vector<Light> lights;
+  for (const auto& obj : json_obj["planes"]) {
+    planes.push_back(plane_from_json(obj));
+  }
+  for (const auto& obj : json_obj["spheres"]) {
+    spheres.push_back(sphere_from_json(obj));
+  }
+  for (const auto& obj : json_obj["lights"]) {
+    lights.push_back(light_from_json(obj));
+  }
+  return Scene(camera, spheres, planes, lights);
+}
+
+Scene read_scene(const std::string& path) {
+  std::ifstream in(path);
+  json json_obj;
+  in >> json_obj;
+  return scene_from_json(json_obj);
 }

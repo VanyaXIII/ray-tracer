@@ -23,6 +23,7 @@ endif()
 
 find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 find_package(SDL2 REQUIRED CONFIG COMPONENTS SDL2main)
+find_package(nlohmann_json 3.2.0 REQUIRED)
 include_directories(ray-tracer ${SDL2_INCLUDE_DIRS})
 
 add_executable(ray-tracer main.cpp
@@ -57,10 +58,12 @@ add_executable(ray-tracer main.cpp
         render/objects/colored_plane.cpp
         render/objects/colored_plane.h
         render/scene/renderer.cpp
-        render/scene/renderer.h)
+        render/scene/renderer.h
+        utils.h)
 
 if(TARGET SDL2::SDL2main)
     target_link_libraries(ray-tracer PRIVATE SDL2::SDL2main)
 endif()
 
 target_link_libraries(ray-tracer PRIVATE SDL2::SDL2)
+target_link_libraries(ray-tracer PRIVATE nlohmann_json::nlohmann_json)

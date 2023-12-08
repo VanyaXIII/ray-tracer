@@ -40,4 +40,9 @@ public:
   void trace_rays();
   const Camera& camera() const;
   const Pixmap& pixmap() const;
+
+  json to_json() const;
 };
+
+Scene scene_from_json(const json& json_obj);
+Scene read_scene(const std::string& path);

@@ -6,7 +6,7 @@
 
 Plane::Plane(const Vector3& normal, const Point3& point) : normal(normal.normalized()), point(point),
                                                            coef_val(
-                                                             -normal.x * point.x - normal.y * point.y - normal.z * point
+                                                             -this->normal.x * point.x - this->normal.y * point.y - this->normal.z * point
                                                              .z) {
 }
 

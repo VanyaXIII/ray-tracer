@@ -1,6 +1,7 @@
 #include "material.h"
 
 #include "utils/compare.h"
+#include "utils/utils.h"
 
 Color::Color(int r, int g, int b) : r(r), g(g), b(b) {
 }
@@ -39,4 +40,22 @@ Material::Material(const Color& diffuse_color, const Vector3& albedo,
 }
 
 Material::Material() : diffuse_color(), albedo({1, 0, 0}), spec_exp(0) {
+}
+
+json Material::to_json() const {
+  json res;
+  res["spec_exp"] = spec_exp;
+  res["diffuse_color"]["r"] = diffuse_color.r;
+  res["diffuse_color"]["g"] = diffuse_color.g;
+  res["diffuse_color"]["b"] = diffuse_color.b;
+  res["albedo"] = vec_to_json(albedo);
+  return res;
+}
+
+Material material_from_json(const json& json_obj) {
+  Color color;
+  color.r = json_obj["diffuse_color"]["r"];
+  color.g = json_obj["diffuse_color"]["g"];
+  color.b = json_obj["diffuse_color"]["b"];
+  return Material(color, vec_from_json(json_obj["albedo"]), json_obj["spec_exp"]);
 }

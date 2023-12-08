@@ -1,8 +1,9 @@
 #pragma once
-#include <utility>
+#include <nlohmann/json.hpp>
 
 #include "utils/vector3.h"
 
+using namespace nlohmann;
 
 struct Color {
     double r;
@@ -22,4 +23,7 @@ struct Material {
     double spec_exp;
     Material(const Color& diffuse_color, const Vector3& albedo, double spec_exp);
     Material();
+    json to_json() const;
 };
+
+Material material_from_json(const json& json_obj);
